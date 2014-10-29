@@ -15,13 +15,18 @@ class <?php echo $this->controllerClass; ?> extends CmsController
 	/////////////////////////////
 	
 	public $defaultAction='admin';
-<?php if($this->fontIcon!==null):?>
-	public $title='<i class="fa <?php echo $this->fontIcon?>"></i>'.Yii::t('app','<?php echo $this->labelName; ?>');
-<?php else:?>
-	public $title='<?php echo $this->labelName; ?>';
-<?php endif;?>
-	public $subTitle='Admin '.Yii::t('app','<?php echo $this->labelName; ?>');
 	
+	public function init()
+	{
+		parent::init();
+		<?php if($this->fontIcon!==null):?>
+			$this->title='<i class="fa <?php echo $this->fontIcon?>"></i>'.Yii::t('app','<?php echo $this->labelName; ?>');
+		<?php else:?>
+			$this->title='<?php echo $this->labelName; ?>';
+		<?php endif;?>
+			$this->subTitle='Admin '.Yii::t('app','<?php echo $this->labelName; ?>');
+	}
+
 	/**
 	 * @return array action filters
 	 */
