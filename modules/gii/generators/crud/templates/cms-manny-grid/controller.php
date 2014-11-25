@@ -15,6 +15,15 @@ class <?php echo $this->controllerClass; ?> extends CmsController
 	/////////////////////////////
 	
 	public $defaultAction='admin';
+<<<<<<< HEAD
+=======
+<?php if($this->fontIcon!==null):?>
+	public $title='<i class="fa <?php echo $this->fontIcon?>"></i> <?php echo $this->labelName; ?>';
+<?php else:?>
+	public $title='<?php echo $this->labelName; ?>';
+<?php endif;?>
+	public $subTitle='Admin <?php echo $this->labelName; ?>';
+>>>>>>> 0e348a322b65e1d5d9f1e2aba913de658eb8ffd1
 	
 	public function init()
 	{

@@ -6,9 +6,6 @@
 /**
  * We are creating the aliases for retalapp structure
 */ 
-Yii::setPathOfAlias('app',dirname(__FILE__).'/../../../../app');
-Yii::setPathOfAlias('core',dirname(__FILE__).'/..');
-
 
 /**
  * Now we can set the oters path configuraions
@@ -16,7 +13,6 @@ Yii::setPathOfAlias('core',dirname(__FILE__).'/..');
 $appAlias=Yii::getPathOfAlias('app');
 
 $paramsConfig=array(
-    // this is used in contact page
     'version' => 'v0.1.1',
 );
 
@@ -106,6 +102,7 @@ $componentsConfig['urlManager']=array(
 return array(
     'basePath' => $appAlias,
     'theme'=>'flat',
+    'language'=>isset($paramsConfig['language'])?$paramsConfig['language']:'en',
     'defaultController'=>$defaultController,
     'modules' => require($appAlias.'/config/modules.php'),
     'extensionPath' => dirname(__FILE__).'/../extensions/',

@@ -1,7 +1,13 @@
-<?php echo "<?php\n"; ?>
+<?php
 
-class <?php echo $this->moduleClass; ?> extends Module
+class TranslationModule extends Module
 {
+	public $languages=array(
+		'en_us'=>'English',
+		'es'=>'Spanish',
+		'fr'=>'French',
+	);
+
 	public function init()
 	{
 		parent::init();
@@ -9,7 +15,7 @@ class <?php echo $this->moduleClass; ?> extends Module
 		// you may place code here to customize the module or the application
 
 		// import the module-level models and components
-		defined('<?php echo strtoupper($this->moduleID); ?>_ID') or define('<?php echo strtoupper($this->moduleID); ?>_ID',$this->id);
+		defined('TRANSLATION_ID') or define('TRANSLATION_ID',$this->id);
 		
 		$this->setImport(array(
 			$this->id.'.models.base.*',
@@ -37,11 +43,14 @@ class <?php echo $this->moduleClass; ?> extends Module
 	 * For one link on admin sidebar
 	*/
 	public function menuItems()
-	{
-		return array(
-            array('label'=>$this->labelMenu!==null?$this->labelMenu:Yii::t('app',ucfirst($this->id)), 'icon'=>'fa fa-puzzle-piece', 'url'=>array('/'.$this->id.'/back')),
+    {
+        return array(
+            array('label'=>Yii::t('app','Translation'), 'icon'=>'fa fa-language', 'url'=>array('#'), 'items'=>array(
+                array('label'=>Yii::t('app','Translate Labels'), 'icon'=>'fa fa-language', 'url'=>array('/'.$this->id.'/translationsourcemessage/admin')),
+                // ... Put here more sub-menues like this 
+            )),
        );
-	}
+    }
 
 	/*
 	 * HOeee!! Do you want a multi-level menu?
@@ -49,8 +58,8 @@ class <?php echo $this->moduleClass; ?> extends Module
 	public function menuItems()
 	{
 		return array(
-            array('label'=>Yii::t('app','<?php echo ucfirst($this->moduleID); ?>'), 'icon'=>'fa fa-puzzle-piece', 'url'=>array('#'), 'items'=>array(
-			    array('label'=>Yii::t('app','Admin <?php echo ucfirst($this->moduleID); ?>'), 'icon'=>'fa fa-list', 'url'=>array('/'.$this->id.'/mycontrollername/andactionname')),
+            array('label'=>Yii::t('app','Translation'), 'icon'=>'fa fa-puzzle-piece', 'url'=>array('#'), 'items'=>array(
+			    array('label'=>Yii::t('app','Admin Translation'), 'icon'=>'fa fa-list', 'url'=>array('/'.$this->id.'/mycontrollername/andactionname')),
             	// ... Put here more sub-menues like this 
             )),
        );
@@ -59,9 +68,9 @@ class <?php echo $this->moduleClass; ?> extends Module
 	
 	public function renderPartialView($view,$params=array())
     {
-    	if(r()->controller->getViewFile('//'.<?php echo strtoupper($this->moduleID); ?>_ID.'/page/'.$view)!==false)
-			return r()->controller->renderPartial('//'.<?php echo strtoupper($this->moduleID); ?>_ID.'/page/'.$view,$params,true);
-		return r()->controller->renderPartial(<?php echo strtoupper($this->moduleID); ?>_ID.'.views.page.'.$view,$params,true);
+    	if(r()->controller->getViewFile('//'.TRANSLATION_ID.'/page/'.$view)!==false)
+			return r()->controller->renderPartial('//'.TRANSLATION_ID.'/page/'.$view,$params,true);
+		return r()->controller->renderPartial(TRANSLATION_ID.'.views.page.'.$view,$params,true);
 	}
 	
 	/*
@@ -70,11 +79,11 @@ class <?php echo $this->moduleClass; ?> extends Module
 	public function getTypesBlocks()
     {
     	return array(
-			'<?php echo ($this->moduleID); ?>-1'=>'landing<?php echo ucfirst($this->moduleID); ?>',
+			'translation-1'=>'landingTranslation',
 		);
     }
 
-	public function landing<?php echo ucfirst($this->moduleID); ?>($item=null)
+	public function landingTranslation($item=null)
 	{
 		return $this->renderPartialView('_block');
 	}

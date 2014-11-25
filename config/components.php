@@ -44,13 +44,12 @@ return array(
         "itemChildTable" => 'users_authitemchild',
         "assignmentTable" => 'users_authassignment',
     ),
+
+    // TODO for PHP
     'coreMessages' => array(
         'language'=>'en_us',
-        'class'=>'CDbMessageSource',
-        "connectionID" => "db",
-        "sourceMessageTable" => 'translation_source_message',
-        "translatedMessageTable" => 'translation_message',
-        "cachingDuration" => 0,
+        'class'=>'CPhpMessageSource',
+        //'basePath'=>dirname ...'messages',
     ),
     'messages' => array(
         'class'=>'CDbMessageSource',
